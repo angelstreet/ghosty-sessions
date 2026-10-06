@@ -1,4 +1,6 @@
-# Ghosty Sessions
+# mycodebox
+
+> Repo name: `ghosty-sessions`. **Installing it with an AI agent? Point the agent at [`docs/INSTALL.md`](docs/INSTALL.md); agent rules for working in this repo are in [`AGENTS.md`](AGENTS.md).**
 
 Mobile-first control room for the Claude Code / Codex / MiniMax coding agents running in tmux on `codebox`.
 Streams every `tmux capture-pane` to your phone over Tailscale (1 Hz tick),
@@ -88,7 +90,7 @@ owner's labels show it agrees often enough. The manager agent session is the nex
   and the orange ↓ button in the topbar fires the system install prompt.
 
 The server listens on `0.0.0.0:7777` and `0.0.0.0:7443`. It is reached via
-`codebox`'s Tailscale IP (typically `100.74.90.82`). The Proxmox firewall on
+the machine's Tailscale IP (see `tailscale ip -4`). The Proxmox firewall on
 `vmbr0` does not expose these ports to LAN guests — only tailnet peers can reach them.
 
 ## Run on codebox
@@ -113,7 +115,7 @@ Env vars (defaults shown). The unit sets the non-secret ones and loads the gitig
 ```bash
 # ~/ghosty-sessions/.env  (chmod 600, never committed)
 NTFY_TOPIC=ghosty-codebox-<random>      # subscribe to the same topic in the ntfy phone app
-PUBLIC_URL=http://100.74.90.82:7777     # notification tap opens /?s=<session>
+PUBLIC_URL=http://<tailscale-ip>:7777     # notification tap opens /?s=<session>
 ```
 
 ### Langfuse evaluation (TASK-44 phase 12)
@@ -819,7 +821,7 @@ The bar-chart icon in the topbar (next to the robot) opens **Usage - API-equival
 and **14 days**, with totals, per agent, per project (top 10), per session (top 15, outliers first; project,
 agent, model, cost, tokens, cost per active hour), per day (CSS bars, 14 days tab) and per model, tokens as
 in / out / cache r / cache w (`12.3M`). A session row opens that session's card; the footer links to Langfuse
-(`http://100.74.90.82:3100`, tailnet).
+(`http://<tailscale-ip>:3100`, tailnet).
 
 - **All costs are API-equivalent at list prices, not money spent.** The plans are flat subscriptions (Claude Max
   200 EUR, Codex / ChatGPT Plus 20 EUR, MiniMax 40 EUR per month); each agent row shows its plan and the live 5 h /
@@ -919,7 +921,7 @@ It appears in the sidebar within ~1 s.
 
 ## License
 
-Private. Joakim, your call whether to OSS.
+No license file yet: all rights reserved by the author until one is added.
 ## Icons
 
 All UI icons come from one set in `public/icons.js` (24x24 grid, 2px round strokes, `currentColor`). Do not paste emoji, unicode
